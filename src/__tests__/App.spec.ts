@@ -167,6 +167,8 @@ describe('App', () => {
       email: 'oi@rocketseat.com.br',
     });
 
+    console.log(customer);
+
     const response = await request(app)
       .post('/orders')
       .send({
@@ -177,6 +179,7 @@ describe('App', () => {
           },
         ],
       });
+    console.log(response.status);
 
     expect(response.status).toEqual(400);
   });
