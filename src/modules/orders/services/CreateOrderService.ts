@@ -28,16 +28,16 @@ class CreateOrderService {
 
     @inject('OrdersRepository')
     private ordersRepository: IOrdersRepository,
-  ) { }
+  ) {}
 
   public async execute({ customer_id, products }: IRequest): Promise<Order> {
     const customerExists = await this.customersRepository.findById(customer_id);
 
-    const productsExists = await this.productsRepository.findAllById(products);
-
     if (!customerExists) {
       throw new AppError('Customer not found');
     }
+
+    const productsExists = await this.productsRepository.findAllById(products);
 
     if (!productsExists.length) {
       throw new AppError('Products not found');
